@@ -11,8 +11,23 @@ class SimpleMap extends Component {
       lat: 39.126499,
       lng: -77.000748
     },
-    zoom: 15
+    zoom: 15,
   };
+
+  createMapOptions(){
+    return{
+      minZoom: 15,
+      maxZoom:17,
+      restriction:{
+        latLngBounds:{
+          north: 39.135855,
+          south: 39.116743,
+          east: -76.995111,
+          west: -77.036545
+        }
+      }
+    }
+  }
 
   render() {
     return (
@@ -25,6 +40,7 @@ class SimpleMap extends Component {
           bootstrapURLKeys={{ key: "AIzaSyDAOaA61-Ik4j5wJibuRK_PEzREvyEpZ4w"}}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
+          options={this.createMapOptions}
         >
           <img
             src= {pic}

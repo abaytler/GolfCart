@@ -7,9 +7,6 @@
 //     }
 // }
 
-aws_access_key_id = "AKIARM3VARJJECNYUFEC"
-aws_secret_access_key = "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"
-
 const AWS = require('aws-sdk');
 
 // Create the DynamoDB Client with the region you want
@@ -24,7 +21,6 @@ executeQuery(dynamoDbClient, queryInput).then(() => {
     console.info('Query API call has been executed.')
   }
 );
-  
 
 //Load HTTP module
 const http = require("http");
