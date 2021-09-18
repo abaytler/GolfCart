@@ -12,7 +12,7 @@ class SimpleMap extends Component {
       lat: 39.126499,
       lng: -77.000748
     },
-    zoom: 15,
+    zoom: 13,
   };
 
   createMapOptions(){
@@ -23,23 +23,21 @@ class SimpleMap extends Component {
         latLngBounds:{
           north: 39.135855,
           south: 39.116743,
-          east: -76.995111,
-          west: -77.036545
+          east: -76.985111,
+          west: -77.026545
         }
       }
     }
   }
   getDataFromLambda() {
     let wsUri = "wss://2g54sjwc90.execute-api.us-east-1.amazonaws.com/dev/";
-    var output;
-
+    init();
     function init() {
-        output = document.getElementById("output");
         testWebSocket();
     }
 
     function testWebSocket() {
-        let websocket = new WebSocket(wsUri);
+        const websocket = new WebSocket(wsUri);
 
         websocket.onopen = function(evt) {
           onOpen(evt)
@@ -65,33 +63,33 @@ class SimpleMap extends Component {
       let lat = seperatedData[0];
       let long = seperatedData[1];
       let received_at = seperatedData[2];
-        writeToScreen('<span style = "color: blue;">RESPONSE: ' +
-          lat+'</span>');
+      console.log(lat);
+        //writeToScreen('<span style = "color: blue;">RESPONSE: ' +lat+'</span>');
     }
 
     function onError(evt) {
-        writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+        //writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
     }
 
     function doSend(message) {
-        writeToScreen("SENT: " + message); testWebSocket.websocket.send(message);
+        //writeToScreen("SENT: " + message); client.send(message);
+        
     }
 
     function writeToScreen(message) {
-        var pre = document.createElement("p");
-        pre.style.wordWrap = "break-word";
-        pre.innerHTML = message; output.appendChild(pre);
+        //var pre = document.createElement("p");
+        //pre.style.wordWrap = "break-word";
+        //pre.innerHTML = message; output.appendChild(pre);
     }
 
     window.addEventListener("load", init, false);
   }
 	  
   render() {
+    this.getDataFromLambda();
     return (
       // Important! Always set the container height explicitly
-	  
-      <div style={{ height: '75vh', width: '85%', margin:"auto" }}>
-        <h1 style={{textAlign:'center',color:'black'}}>Golf Cart Dinos</h1>
+        <div style={{ height: '100vh', width: '100%', margin:"auto" }}>
         <ButtonAppBar></ButtonAppBar>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyDAOaA61-Ik4j5wJibuRK_PEzREvyEpZ4w"}}
@@ -103,36 +101,10 @@ class SimpleMap extends Component {
             src= {pic}
             className="photo2"
             alt={"test"}
-            lat={36}
-            lng={-77.000748}
-          />
-          <img
-            src= {pic}
-            className="photo2"
-            alt={"test"}
-            lat={39.123493}
-            lng={-77.000748}
-          />
-          <img
-            src= {pic}
-            className="photo2"
-            alt={"test"}
-            lat={39.126993}
-            lng={-77.010748}
-          />
-          <img
-            src= {pic}
-            className="photo2"
-            alt={"test"}
-            lat={39.122493}
-            lng={-77.010748}
-          />
-          <img
-            src= {pic}
-            className="photo2"
-            alt={"test"}
-            lat={39.126499}
-            lng={-77.006748}
+            // lat={39.123793}
+            latdevice={this.lat}
+            // lng={-77.000748}
+            lngdevice={this.long}
           />
           <AnyReactComponent
             text="Hampshire Greens Club House"
@@ -141,6 +113,7 @@ class SimpleMap extends Component {
           />       
         </GoogleMapReact>
       </div>
+      
     );
   }
 }

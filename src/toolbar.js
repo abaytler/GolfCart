@@ -56,9 +56,9 @@ export default function ButtonAppBar() {
         </div>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Menu
+            GOLF CART DRAGINO
           </Typography>
-          <Button color="inherit">Dinos</Button>
+          <Button color="inherit">Powered by IOT Things</Button>
         </Toolbar>
       </AppBar>
     </div>
